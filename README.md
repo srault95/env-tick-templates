@@ -1,2 +1,2 @@
 # env-tick-templates
-Telegraf, InfluxDB and Grafana
+Telegraf, InfluxDB, Chronograf, Kapacitor and Grafana
