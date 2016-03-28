@@ -13,9 +13,9 @@ for item in $(ls /tmp/*-datasource.json); do
   sleep 2
 done
 
-# add dashboards
-for item in $(ls /tmp/*-dashboard.json); do
-  curl -k -u $CREDENTIALS -H 'content-type: application/json' http://$HOST:$PORT/api/dashboards/db -d@$item;
-  echo "Dashboard created successfully $item"
-  sleep 2
-done
+# add dashboards // DISABLED FOR NOW
+#for item in $(ls /tmp/*-dashboard.json); do
+#  curl -k -u $CREDENTIALS -H 'content-type: application/json' http://$HOST:$PORT/api/dashboards/db -d@$item;
+#  echo "Dashboard created successfully $item"
+#  sleep 2
+#done
