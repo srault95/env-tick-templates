@@ -1,0 +1,11 @@
+{
+    "name":"influx",
+    "type":"influxdb",
+    "access":"proxy",
+    "url":"http://172.17.0.2:8086",
+    "database":"metrics",
+    "basicAuth":false,
+    "isDefault":true,
+    "user": "support",
+    "password": "support"
+}
