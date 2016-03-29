@@ -6,6 +6,6 @@
     "database":"metrics",
     "basicAuth":false,
     "isDefault":true,
-    "user": "support",
-    "password": "support"
+    "user": "guest",
+    "password": "readonly"
 }
