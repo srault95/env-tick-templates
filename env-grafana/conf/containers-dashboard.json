@@ -1,6 +1,5 @@
 {
-"dashboard":
-{
+"dashboard": {
   "id": null,
   "title": "Containers",
   "originalTitle": "Containers",
@@ -57,13 +56,13 @@
                   {
                     "type": "top",
                     "params": [
-                      "5"
+                      3
                     ]
                   }
                 ]
               ],
               "measurement": "docker_cpu",
-              "query": "SELECT top(\"usage_percent\", 5) FROM \"docker_cpu\" WHERE $timeFilter GROUP BY time($interval) fill(null)"
+              "query": "SELECT top(\"usage_percent\", 3) FROM \"docker_cpu\" WHERE $timeFilter GROUP BY time($interval) fill(null)"
             }
           ],
           "cacheTimeout": null,
@@ -433,7 +432,7 @@
                 {
                   "type": "tag",
                   "params": [
-                    "io.kubernetes.pod.name"
+                    "cont_name"
                   ]
                 },
                 {
@@ -458,7 +457,7 @@
                 ]
               ],
               "measurement": "docker_cpu",
-              "query": "SELECT mean(\"usage_percent\") FROM \"docker_cpu\" WHERE $timeFilter GROUP BY time(1m), \"io.kubernetes.pod.name\" fill(null)",
+              "query": "SELECT mean(\"usage_percent\") FROM \"docker_cpu\" WHERE $timeFilter GROUP BY time(1m), \"cont_name\" fill(null)",
               "alias": ""
             }
           ],
@@ -548,7 +547,7 @@
                 {
                   "type": "tag",
                   "params": [
-                    "io.kubernetes.pod.name"
+                    "cont_name"
                   ]
                 },
                 {
@@ -573,7 +572,7 @@
                 ]
               ],
               "measurement": "docker_mem",
-              "query": "SELECT mean(\"max_usage\") FROM \"docker_mem\" WHERE $timeFilter GROUP BY time($interval), \"io.kubernetes.pod.name\" fill(null)"
+              "query": "SELECT mean(\"max_usage\") FROM \"docker_mem\" WHERE $timeFilter GROUP BY time($interval), \"cont_name\" fill(null)"
             }
           ],
           "aliasColors": {
@@ -593,7 +592,7 @@
         {
           "title": "DOCKER MEMORY LIMIT",
           "error": false,
-          "span": 6,
+          "span": 4,
           "editable": true,
           "type": "graph",
           "isNew": true,
@@ -689,9 +688,9 @@
           "links": []
         },
         {
-          "title": "DOCKER MEMORY ACTIVE ANON/FILE",
+          "title": "DOCKER MEMORY ACTIVE ANON",
           "error": false,
-          "span": 6,
+          "span": 4,
           "editable": true,
           "type": "graph",
           "isNew": true,
@@ -778,9 +777,72 @@
               "measurement": "docker_mem",
               "query": "SELECT mean(\"total_active_anon\") FROM \"docker_mem\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
               "alias": "mem active anon"
-            },
+            }
+          ],
+          "aliasColors": {
+            "mem active anon": "#64B0C8",
+            "mem active file": "#705DA0"
+          },
+          "seriesOverrides": [],
+          "links": []
+        },
+        {
+          "title": "DOCKER MEMORY ACTIVE FILE",
+          "error": false,
+          "span": 4,
+          "editable": true,
+          "type": "graph",
+          "isNew": true,
+          "id": 12,
+          "datasource": null,
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "bytes",
+            "short"
+          ],
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null,
+            "rightLogBase": 1,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": true,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": true,
+            "min": true,
+            "max": true,
+            "current": true,
+            "total": false,
+            "avg": true,
+            "alignAsTable": false
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "shared": true
+          },
+          "timeFrom": null,
+          "timeShift": null,
+          "targets": [
             {
-              "refId": "B",
+              "refId": "A",
               "dsType": "influxdb",
               "resultFormat": "time_series",
               "tags": [],
@@ -818,8 +880,8 @@
             }
           ],
           "aliasColors": {
-            "mem active anon": "#64B0C8",
-            "mem active file": "#705DA0"
+            "docker_mem.mean": "#CCA300",
+            "mem active file": "#CCA300"
           },
           "seriesOverrides": [],
           "links": []
@@ -904,7 +966,7 @@
                 {
                   "type": "tag",
                   "params": [
-                    "io.kubernetes.pod.name"
+                    "cont_name"
                   ]
                 },
                 {
@@ -929,7 +991,7 @@
                 ]
               ],
               "measurement": "docker_net",
-              "query": "SELECT mean(\"rx_bytes\") FROM \"docker_net\" WHERE $timeFilter GROUP BY time($interval), \"io.kubernetes.pod.name\" fill(null)"
+              "query": "SELECT mean(\"rx_bytes\") FROM \"docker_net\" WHERE $timeFilter GROUP BY time($interval), \"cont_name\" fill(null)"
             }
           ],
           "aliasColors": {},
@@ -1016,7 +1078,7 @@
                 {
                   "type": "tag",
                   "params": [
-                    "io.kubernetes.pod.name"
+                    "cont_name"
                   ]
                 },
                 {
@@ -1041,7 +1103,7 @@
                 ]
               ],
               "measurement": "docker_net",
-              "query": "SELECT mean(\"tx_bytes\") FROM \"docker_net\" WHERE $timeFilter GROUP BY time($interval), \"io.kubernetes.pod.name\" fill(null)"
+              "query": "SELECT mean(\"tx_bytes\") FROM \"docker_net\" WHERE $timeFilter GROUP BY time($interval), \"cont_name\" fill(null)"
             }
           ],
           "aliasColors": {},

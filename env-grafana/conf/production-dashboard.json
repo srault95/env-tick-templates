@@ -1,8 +1,8 @@
 {
 "dashboard": {
   "id": null,
-  "title": "Production",
-  "originalTitle": "Production",
+  "title": "Host",
+  "originalTitle": "Host",
   "tags": [],
   "style": "dark",
   "timezone": "browser",
@@ -549,11 +549,11 @@
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
           "lines": true,
-          "fill": 1,
+          "fill": 2,
           "linewidth": 2,
           "points": false,
           "pointradius": 5,
-          "bars": false,
+          "bars": true,
           "stack": false,
           "percentage": false,
           "legend": {
@@ -572,7 +572,7 @@
             "value_type": "cumulative",
             "shared": true
           },
-          "timeFrom": "1h",
+          "timeFrom": null,
           "timeShift": null,
           "targets": [
             {
@@ -611,84 +611,10 @@
               "measurement": "system",
               "query": "SELECT mean(\"load1\") FROM \"system\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
               "alias": "load 1 min"
-            },
-            {
-              "refId": "B",
-              "dsType": "influxdb",
-              "resultFormat": "time_series",
-              "tags": [],
-              "groupBy": [
-                {
-                  "type": "time",
-                  "params": [
-                    "$interval"
-                  ]
-                },
-                {
-                  "type": "fill",
-                  "params": [
-                    "null"
-                  ]
-                }
-              ],
-              "select": [
-                [
-                  {
-                    "type": "field",
-                    "params": [
-                      "load5"
-                    ]
-                  },
-                  {
-                    "type": "mean",
-                    "params": []
-                  }
-                ]
-              ],
-              "measurement": "system",
-              "query": "SELECT mean(\"load5\") FROM \"system\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "alias": "load 5 min"
-            },
-            {
-              "refId": "C",
-              "dsType": "influxdb",
-              "resultFormat": "time_series",
-              "tags": [],
-              "groupBy": [
-                {
-                  "type": "time",
-                  "params": [
-                    "$interval"
-                  ]
-                },
-                {
-                  "type": "fill",
-                  "params": [
-                    "null"
-                  ]
-                }
-              ],
-              "select": [
-                [
-                  {
-                    "type": "field",
-                    "params": [
-                      "load15"
-                    ]
-                  },
-                  {
-                    "type": "mean",
-                    "params": []
-                  }
-                ]
-              ],
-              "measurement": "system",
-              "query": "SELECT mean(\"load15\") FROM \"system\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
-              "alias": "load 15 min"
             }
           ],
           "aliasColors": {
-            "load 1 min": "#508642",
+            "load 1 min": "#E24D42",
             "load 5 min": "#CCA300",
             "load 15 min": "#0A50A1"
           },
@@ -704,9 +630,9 @@
       "collapse": false,
       "panels": [
         {
-          "title": "CPU USAGE SYSTEM/USER",
+          "title": "CPU USAGE SYSTEM",
           "error": false,
-          "span": 12,
+          "span": 6,
           "editable": true,
           "type": "graph",
           "isNew": true,
@@ -795,9 +721,73 @@
               "measurement": "cpu",
               "query": "SELECT mean(\"usage_system\") FROM \"cpu\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
               "alias": "system"
-            },
+            }
+          ],
+          "aliasColors": {
+            "system": "#E24D42",
+            "user": "#EAB839"
+          },
+          "seriesOverrides": [],
+          "links": [],
+          "transparent": false
+        },
+        {
+          "title": "CPU USAGE USER",
+          "error": false,
+          "span": 6,
+          "editable": true,
+          "type": "graph",
+          "isNew": true,
+          "id": 18,
+          "datasource": null,
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null,
+            "rightLogBase": 1,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": true,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": true,
+            "min": true,
+            "max": true,
+            "current": true,
+            "total": false,
+            "avg": true,
+            "alignAsTable": true
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "shared": true
+          },
+          "timeFrom": null,
+          "timeShift": null,
+          "targets": [
             {
-              "refId": "B",
+              "refId": "A",
               "dsType": "influxdb",
               "resultFormat": "time_series",
               "tags": [],
@@ -835,12 +825,11 @@
             }
           ],
           "aliasColors": {
-            "system": "#E24D42",
-            "user": "#EAB839"
+            "cpu.mean": "#2F575E",
+            "user": "#2F575E"
           },
           "seriesOverrides": [],
-          "links": [],
-          "transparent": false
+          "links": []
         }
       ]
     },
@@ -1764,168 +1753,6 @@
           },
           "seriesOverrides": [],
           "links": []
-        }
-      ]
-    },
-    {
-      "title": "New row",
-      "height": "250px",
-      "editable": true,
-      "collapse": false,
-      "panels": [
-        {
-          "title": "INODES",
-          "error": false,
-          "span": 12,
-          "editable": true,
-          "type": "table",
-          "isNew": true,
-          "id": 19,
-          "styles": [
-            {
-              "type": "date",
-              "pattern": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss"
-            },
-            {
-              "unit": "none",
-              "type": "number",
-              "decimals": 0,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "colorMode": null,
-              "pattern": "/.*/",
-              "thresholds": []
-            }
-          ],
-          "targets": [
-            {
-              "refId": "B",
-              "dsType": "influxdb",
-              "resultFormat": "time_series",
-              "tags": [],
-              "groupBy": [
-                {
-                  "type": "time",
-                  "params": [
-                    "1m"
-                  ]
-                },
-                {
-                  "type": "fill",
-                  "params": [
-                    "previous"
-                  ]
-                }
-              ],
-              "select": [
-                [
-                  {
-                    "type": "field",
-                    "params": [
-                      "inodes_used"
-                    ]
-                  },
-                  {
-                    "type": "mean",
-                    "params": []
-                  }
-                ]
-              ],
-              "measurement": "disk",
-              "query": "SELECT mean(\"inodes_used\") FROM \"disk\" WHERE $timeFilter GROUP BY time(1m) fill(previous)",
-              "alias": "inodes used"
-            },
-            {
-              "refId": "A",
-              "dsType": "influxdb",
-              "resultFormat": "time_series",
-              "tags": [],
-              "groupBy": [
-                {
-                  "type": "time",
-                  "params": [
-                    "1m"
-                  ]
-                },
-                {
-                  "type": "fill",
-                  "params": [
-                    "previous"
-                  ]
-                }
-              ],
-              "select": [
-                [
-                  {
-                    "type": "field",
-                    "params": [
-                      "inodes_free"
-                    ]
-                  },
-                  {
-                    "type": "mean",
-                    "params": []
-                  }
-                ]
-              ],
-              "measurement": "disk",
-              "query": "SELECT mean(\"inodes_free\") FROM \"disk\" WHERE $timeFilter GROUP BY time(1m) fill(previous)",
-              "alias": "inodes free"
-            },
-            {
-              "refId": "C",
-              "dsType": "influxdb",
-              "resultFormat": "time_series",
-              "tags": [],
-              "groupBy": [
-                {
-                  "type": "time",
-                  "params": [
-                    "1m"
-                  ]
-                },
-                {
-                  "type": "fill",
-                  "params": [
-                    "previous"
-                  ]
-                }
-              ],
-              "select": [
-                [
-                  {
-                    "type": "field",
-                    "params": [
-                      "inodes_total"
-                    ]
-                  },
-                  {
-                    "type": "mean",
-                    "params": []
-                  }
-                ]
-              ],
-              "measurement": "disk",
-              "query": "SELECT mean(\"inodes_total\") FROM \"disk\" WHERE $timeFilter GROUP BY time(1m) fill(previous)",
-              "alias": "inodes total"
-            }
-          ],
-          "transform": "timeseries_to_columns",
-          "pageSize": null,
-          "showHeader": true,
-          "columns": [],
-          "scroll": true,
-          "fontSize": "100%",
-          "sort": {
-            "col": 0,
-            "desc": true
-          },
-          "links": [],
-          "timeFrom": "1h"
         }
       ]
     }
