@@ -2,7 +2,7 @@
     "name":"influx",
     "type":"influxdb",
     "access":"proxy",
-    "url":"http://172.17.0.2:8086",
+    "url":"http://_INFLUX_",
     "database":"metrics",
     "basicAuth":false,
     "isDefault":true,

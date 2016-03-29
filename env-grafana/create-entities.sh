@@ -6,6 +6,8 @@ while ! echo "quit" | nc $HOST 3000 | grep HTTP
     sleep 3
 done
 
+sed -i -e "s/_INFLUX_/$INFLUXDB_PORT_8086_TCP_ADDR:$INFLUXDB_PORT_8086_TCP_PORT/g" "/tmp/influxdb-datasource.json"
+
 # add datasources to grafana 
 for item in $(ls /tmp/*-datasource.json); do
   curl -k -u $CREDENTIALS -H 'content-type: application/json' http://$HOST:$PORT/api/datasources -d@$item;
