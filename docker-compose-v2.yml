@@ -1,0 +1,47 @@
+version: '2'
+services:
+  influxdb:
+    image: quay.io/7insyde/influxdb
+    container_name: influxdb
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+    networks:
+    - 7insyde
+  telegraf:
+    image: quay.io/7insyde/telegraf
+    container_name: telegraf
+    privileged: true
+    volumes:
+      - /var/run:/var/run
+    links:
+      - influxdb
+    environment:
+      - INFLUXDB_PORT_8086_TCP_ADDR=influxdb
+      - INFLUXDB_PORT_8086_TCP_PORT=8086
+    networks:
+    - 7insyde
+  chronograf:
+    image: quay.io/7insyde/chronograf
+    container_name: chronograf
+    ports:
+      - "10000:10000"
+    links:
+      - influxdb
+    networks:
+    - 7insyde
+  grafana:
+    image: quay.io/7insyde/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    links:
+      - influxdb
+    environment:
+      - INFLUXDB_PORT_8086_TCP_ADDR=influxdb
+      - INFLUXDB_PORT_8086_TCP_PORT=8086
+    networks:
+    - 7insyde
+networks:
+  7insyde:
+    external: true
