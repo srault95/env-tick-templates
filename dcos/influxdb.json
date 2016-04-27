@@ -1,0 +1,50 @@
+{
+  "id": "/influxdb",
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "quay.io/7insyde/influxdb",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 8086,
+          "hostPort": 8086,
+          "protocol": "tcp",
+          "servicePort": 10086
+        },
+        {
+          "containerPort": 8083,
+          "hostPort": 8083,
+          "protocol": "tcp",
+          "servicePort": 10083
+        }
+      ]},
+    "volumes": [
+      {
+        "containerPath": "/data",
+        "hostPath": "/data/influxdb",
+        "mode": "RW"
+      }
+    ]
+  },
+  "healthChecks": [{
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "maxConsecutiveFailures": 3,
+      "path": "/ping",
+      "portIndex": 0,
+      "protocol": "HTTP",
+      "timeoutSeconds": 20
+    }],
+  "labels": {
+    "HAPROXY_GROUP": "external"
+  },
+  "cpus": 1,
+  "mem": 512,
+  "disk": 0,
+  "ports": [
+    10086,
+    10083
+  ]
+}

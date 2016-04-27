@@ -1,0 +1,42 @@
+{
+  "id": "/grafana",
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "quay.io/7insyde/grafana",
+      "network": "BRIDGE",
+      "portMappings": [{
+        "containerPort": 3000,
+        "hostPort": 3000,
+        "protocol": "tcp",
+        "servicePort": 10030
+      }],
+      "privileged": false
+    },
+    "volumes": []
+  },
+  "env": {
+    "INFLUXDB_PORT_8086_TCP_ADDR": "influxdb.marathon.mesos",
+    "INFLUXDB_PORT_8086_TCP_PORT": "8086"
+  },
+  "healthChecks": [{
+    "gracePeriodSeconds": 300,
+    "ignoreHttp1xx": false,
+    "intervalSeconds": 60,
+    "maxConsecutiveFailures": 3,
+    "path": "/",
+    "portIndex": 0,
+    "protocol": "HTTP",
+    "timeoutSeconds": 20
+  }],
+  "labels": {
+    "HAPROXY_GROUP": "external"
+  },
+  "cpus": 1,
+  "disk": 0,
+  "mem": 512,
+  "ports": [
+    10030
+  ]
+}
