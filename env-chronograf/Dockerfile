@@ -2,8 +2,8 @@ FROM ubuntu:14.04
 MAINTAINER Sergii Porokh <sporokh@softserveinc.com>
 
 ENV CHRONOGRAF_HOME /chronograf
-ENV CHRONOGRAF_URL=${CHRONOGRAF_URL:-https://s3.amazonaws.com/get.influxdb.org/chronograf}
-ENV CHRONOGRAF_FILE=${CHRONOGRAF_FILE:-chronograf_0.11.0_amd64.deb}
+ENV CHRONOGRAF_URL=${CHRONOGRAF_URL:-https://dl.influxdata.com/chronograf/releases}
+ENV CHRONOGRAF_FILE=${CHRONOGRAF_FILE:-chronograf_0.13.0_amd64.deb}
 ENV CHRONOGRAF_CONFIG /config/config.toml
 
 RUN apt-get update && apt-get install -y wget && \
