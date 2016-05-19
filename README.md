@@ -36,7 +36,7 @@ Automaticly connects to InfluxDB and sending system and docker metrics
 ```
 * Grafana
 ```
-Automaticly connects to InfluxDB (datasource included). No dashboards and visualisations.
+Automaticly connects to InfluxDB (datasource included). Host and Docker dashboards are included.
 ```
 * Chronograf
 ```
