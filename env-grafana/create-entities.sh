@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Grafana variables
+export HOST=localhost
+export PORT=3000
+export CREDENTIALS=admin:admin
+
 while ! echo "quit" | nc $HOST 3000 | grep HTTP
   do
     echo "Grafana is not started yet - `date`"
